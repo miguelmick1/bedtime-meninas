@@ -44,3 +44,12 @@ Preencha `.env.local` com as credenciais do app Web Firebase. Abra http://localh
 - O botão de início do sono não impede sobrescrever um registro da mesma noite. Se clicar por engano, corrija pelo formulário manual.
 - A primeira versão é voltada ao **sono noturno** (um registro por criança por data). Cochilos exigem ampliar o modelo de dados.
 - Use email e senha fortes. Não publique `.env.local` no GitHub. As chaves públicas do Firebase não são segredo; a proteção dos dados depende principalmente das regras do Firestore.
+
+## PWA: instalar nos celulares
+
+O aplicativo possui manifesto Web App, ícones para Android e Apple Touch Icon para iPhone. Depois do deploy HTTPS na Vercel:
+
+- **iPhone (Michelle):** abrir a URL no Safari → Compartilhar → Adicionar à Tela de Início → Adicionar. Fazer login no ícone instalado; a sessão do atalho pode ser independente da sessão anterior do Safari.
+- **Android:** abrir a URL no Chrome → menu ⋮ → Instalar app (ou Adicionar à tela inicial). Fazer login se solicitado.
+
+A autenticação Firebase persiste normalmente no dispositivo, salvo logout, limpeza dos dados ou políticas do navegador. O PWA **não possui modo offline**: é necessária conexão para registrar/sincronizar horários. Para atualização, basta dar push no GitHub; a Vercel publica automaticamente. Se o ícone não mudar imediatamente, remova o atalho antigo e adicione novamente.
