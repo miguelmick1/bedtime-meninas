@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isParent() {
+      return request.auth != null && request.auth.token.email_verified == true && request.auth.token.email in [
+        'SUBSTITUIR_EMAIL_PAI',
+        'SUBSTITUIR_EMAIL_MAE'
+      ];
+    }
+    match /sleepEntries/{entryId} {
+      allow read: if isParent();
+      allow create, update: if isParent()
+        && request.resource.data.child in ['Fernanda','Alice']
+        && request.resource.data.date is string
+        && request.resource.data.keys().hasOnly(['child','date','sleep','wake','updatedBy','updatedAt']);
+      allow delete: if false;
+    }
+  }
+}
